@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FSPlay IPTV — Assista tudo em um só lugar</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0f;--bg2:#12121a;--bg3:#1a1a26;--bg4:#22223a;
+  --accent:#7c3aed;--accent2:#a855f7;--accent3:#c084fc;
+  --txt:#f0f0f5;--txt2:#9898b0;--txt3:#5a5a75;
+  --border:#2a2a40;--green:#22c55e;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;overflow-x:hidden}
+
+.ticker{background:var(--accent);padding:9px 0;overflow:hidden;white-space:nowrap}
+.ticker-inner{display:inline-block;animation:tick 22s linear infinite;font-size:13px;color:#fff;font-weight:500}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+nav{background:rgba(10,10,15,.97);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;backdrop-filter:blur(8px)}
+.nav-logo{font-size:22px;font-weight:800;color:#fff;letter-spacing:-0.5px}.nav-logo span{color:var(--accent2)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:var(--txt2);text-decoration:none;font-size:14px;transition:color .2s}.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--accent);color:#fff !important;padding:9px 20px;border-radius:8px;font-weight:600 !important;transition:background .2s !important}.nav-cta:hover{background:var(--accent2) !important}
+
+.hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 5% 60px;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(124,58,237,.18) 0%,transparent 70%)}
+.hero-badge{background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.4);color:var(--accent3);font-size:13px;padding:5px 16px;border-radius:20px;margin-bottom:24px;display:inline-block}
+.hero h1{font-size:clamp(36px,5.5vw,68px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;color:#fff;max-width:760px}
+.hero h1 span{color:var(--accent2)}
+.hero p{font-size:17px;color:var(--txt2);max-width:500px;margin:18px auto 36px;line-height:1.7}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--accent);color:#fff;padding:14px 30px;border-radius:10px;text-decoration:none;font-size:16px;font-weight:600;transition:all .2s}.btn-primary:hover{background:var(--accent2);transform:translateY(-1px)}
+.btn-wa{display:inline-flex;align-items:center;gap:9px;background:#25d366;color:#fff;padding:14px 30px;border-radius:10px;text-decoration:none;font-size:16px;font-weight:600;transition:all .2s}.btn-wa:hover{background:#1ebe5a;transform:translateY(-1px)}
+.btn-wa svg{width:20px;height:20px}
+.hero-stats{display:flex;gap:44px;margin-top:56px;justify-content:center;flex-wrap:wrap}
+.hero-stat .num{font-size:30px;font-weight:800;color:#fff;text-align:center}.hero-stat .num span{color:var(--accent2)}
+.hero-stat .lbl{font-size:12px;color:var(--txt2);text-align:center;margin-top:2px}
+
+.price-highlight{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:12px;padding:20px 32px;display:inline-flex;align-items:center;gap:20px;margin-top:32px;flex-wrap:wrap;justify-content:center}
+.price-highlight .val{font-size:48px;font-weight:800;color:var(--green);letter-spacing:-2px}
+.price-highlight .val sup{font-size:22px;vertical-align:super}
+.price-highlight .val span{font-size:18px;font-weight:400;color:var(--txt2)}
+.price-highlight .info{text-align:left}
+.price-highlight .info strong{display:block;font-size:15px;color:#fff}
+.price-highlight .info small{font-size:13px;color:var(--txt2)}
+
+section{padding:72px 5%}
+.sec-label{font-size:11px;font-weight:600;color:var(--accent3);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.sec-title{font-size:clamp(26px,3.5vw,38px);font-weight:700;color:#fff;line-height:1.2;letter-spacing:-0.5px}
+.sec-sub{font-size:16px;color:var(--txt2);margin-top:12px;max-width:500px;line-height:1.7}
+.bg2{background:var(--bg2)}
+
+.feats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:44px}
+.feat{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:26px;transition:border-color .2s}.feat:hover{border-color:var(--accent)}
+.feat-icon{font-size:26px;margin-bottom:14px}
+.feat h3{font-size:16px;font-weight:600;color:#fff;margin-bottom:6px}
+.feat p{font-size:13px;color:var(--txt2);line-height:1.6}
+
+.channels-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:40px}
+.ch-badge{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--txt);display:flex;align-items:center;gap:8px;transition:border-color .2s}.ch-badge:hover{border-color:var(--accent2)}
+.ch-badge .em{font-size:16px}
+
+.devices-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-top:40px}
+.dev{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:20px 12px;text-align:center}
+.dev .di{font-size:28px;margin-bottom:10px}
+.dev p{font-size:13px;color:var(--txt2)}
+
+.plan-box{background:var(--bg3);border:2px solid var(--accent);border-radius:20px;padding:40px;max-width:540px;margin:48px auto 0;position:relative}
+.plan-crown{position:absolute;top:-16px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;font-size:13px;font-weight:600;padding:5px 20px;border-radius:20px;white-space:nowrap}
+.plan-name{font-size:13px;font-weight:600;color:var(--txt2);text-transform:uppercase;letter-spacing:2px;margin-bottom:12px}
+.plan-price-wrap{display:flex;align-items:baseline;gap:6px;margin-bottom:8px}
+.plan-price{font-size:56px;font-weight:800;color:#fff;letter-spacing:-2px}
+.plan-price sup{font-size:24px;vertical-align:super;font-weight:500}
+.plan-price-per{font-size:17px;color:var(--txt2)}
+.plan-teste{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);border-radius:8px;padding:10px 16px;font-size:14px;color:var(--green);font-weight:600;margin:16px 0}
+.plan-features{list-style:none;margin:20px 0 28px}
+.plan-features li{font-size:15px;color:var(--txt);padding:8px 0;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.plan-features li:last-child{border:none}
+.plan-features li::before{content:"✓";color:var(--green);font-weight:700;font-size:14px;flex-shrink:0}
+.plan-btn{width:100%;padding:16px;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;text-align:center;text-decoration:none;display:block;background:var(--accent);color:#fff;border:none;transition:all .2s}.plan-btn:hover{background:var(--accent2);transform:translateY(-1px)}
+
+.sem-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:36px}
+.sem-item{background:var(--bg3);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:10px;font-size:14px;color:var(--txt)}
+.sem-item .x{color:#ef4444;font-size:18px;font-weight:700;flex-shrink:0}
+
+.testis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:44px}
+.testi{background:var(--bg3);border:1px solid var(--border);border-radius:14px;padding:22px;transition:border-color .2s}.testi:hover{border-color:var(--accent)}
+.stars{color:#f59e0b;font-size:14px;margin-bottom:10px}
+.testi-text{font-size:14px;color:var(--txt);line-height:1.7;margin-bottom:16px}
+.auth{display:flex;align-items:center;gap:10px}
+.ava{width:38px;height:38px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.aname{font-size:13px;font-weight:600;color:#fff}
+.aloc{font-size:12px;color:var(--txt2)}
+
+.faq-wrap{max-width:700px;margin:44px auto 0}
+.faq-item{border-bottom:1px solid var(--border)}
+details summary{padding:18px 0;font-size:15px;font-weight:500;color:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";color:var(--accent2);font-size:20px;flex-shrink:0;transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+.faq-a{font-size:14px;color:var(--txt2);line-height:1.7;padding-bottom:18px}
+
+.cta-sec{text-align:center;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(124,58,237,.2) 0%,transparent 70%)}
+.cta-sec .sec-title{max-width:480px;margin:0 auto}
+.cta-sec p{color:var(--txt2);margin:16px auto 32px;max-width:400px;font-size:17px;line-height:1.7}
+.wa-big{display:inline-flex;align-items:center;gap:12px;background:#25d366;color:#fff;padding:18px 36px;border-radius:14px;text-decoration:none;font-size:18px;font-weight:700;transition:all .2s}.wa-big:hover{background:#1ebe5a;transform:translateY(-2px)}
+.wa-big svg{width:24px;height:24px}
+.wa-num{display:block;font-size:13px;color:rgba(255,255,255,.7);margin-top:8px}
+
+footer{background:var(--bg2);border-top:1px solid var(--border);padding:40px 5%;text-align:center}
+.flogo{font-size:22px;font-weight:800;color:#fff}.flogo span{color:var(--accent2)}
+footer p{font-size:13px;color:var(--txt3);margin-top:8px}
+
+@media(max-width:640px){.nav-links{display:none}.hero-stats{gap:20px}.plan-price{font-size:42px}}
+</style>
+</head>
+<body>
+
+<div class="ticker">
+  <span class="ticker-inner">
+    &nbsp;&nbsp;🔴 Teste grátis 4 horas &nbsp;|&nbsp; 💰 Apenas R$ 25,00/mês &nbsp;|&nbsp; 📺 +30.000 canais ao vivo &nbsp;|&nbsp; ⚽ Futebol ao vivo &nbsp;|&nbsp; 🎬 Filmes e séries &nbsp;|&nbsp; ✅ Suporte na hora &nbsp;|&nbsp; 🔄 Atualizações toda semana &nbsp;|&nbsp; 🚫 Sem fidelidade &nbsp;|&nbsp; 🚫 Sem contrato &nbsp;|&nbsp; 🔥 Chama no teste! &nbsp;|&nbsp; 🔴 Teste grátis 4 horas &nbsp;|&nbsp; 💰 Apenas R$ 25,00/mês &nbsp;|&nbsp; 📺 +30.000 canais ao vivo &nbsp;|&nbsp; ⚽ Futebol ao vivo &nbsp;|&nbsp; 🎬 Filmes e séries &nbsp;|&nbsp; ✅ Suporte na hora &nbsp;|&nbsp; 🔄 Atualizações toda semana &nbsp;|&nbsp; 🚫 Sem fidelidade &nbsp;|&nbsp; 🚫 Sem contrato &nbsp;|&nbsp; 🔥 Chama no teste! &nbsp;&nbsp;
+  </span>
+</div>
+
+<nav>
+  <div class="nav-logo">FS<span>Play</span></div>
+  <div class="nav-links">
+    <a href="#canais">Canais</a>
+    <a href="#plano">Plano</a>
+    <a href="#dispositivos">Dispositivos</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://wa.me/5511920030389?text=Olá!%20Quero%20testar%20o%20FSPlay!" class="nav-cta">🔥 Teste grátis</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🔥 Chama no teste — 4 horas grátis!</div>
+  <h1>Assista tudo em um <span>só lugar</span></h1>
+  <p>Futebol, séries, filmes, novelas e muito mais. Full HD em qualquer dispositivo, com suporte na hora e atualizações toda semana.</p>
+  <div class="hero-btns">
+    <a href="https://wa.me/5511920030389?text=Olá!%20Quero%20testar%20o%20FSPlay!" class="btn-wa" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Quero meu teste grátis
+    </a>
+    <a href="#plano" class="btn-primary">Ver plano e preço</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">4<span>h</span></div><div class="lbl">Teste grátis</div></div>
+    <div class="hero-stat"><div class="num">R$<span>25</span></div><div class="lbl">Por mês</div></div>
+    <div class="hero-stat"><div class="num">24<span>h</span></div><div class="lbl">Suporte na hora</div></div>
+    <div class="hero-stat"><div class="num">7<span>x</span></div><div class="lbl">Atualização semanal</div></div>
+  </div>
+</section>
+
+<!-- CANAIS -->
+<section class="bg2" id="canais">
+  <div class="sec-label">Conteúdo disponível</div>
+  <div class="sec-title">Tudo que você quer assistir</div>
+  <div class="sec-sub">Categorias completas para toda a família, atualizadas toda semana.</div>
+  <div class="channels-grid">
+    <div class="ch-badge"><span class="em">📺</span> Canais ao vivo</div>
+    <div class="ch-badge"><span class="em">🏆</span> Futebol</div>
+    <div class="ch-badge"><span class="em">🌽</span> A Fazenda</div>
+    <div class="ch-badge"><span class="em">👩‍❤️‍💋‍👨</span> Doramas</div>
+    <div class="ch-badge"><span class="em">✅</span> Netflix</div>
+    <div class="ch-badge"><span class="em">✴️</span> Premiere</div>
+    <div class="ch-badge"><span class="em">💠</span> Amazon Prime</div>
+    <div class="ch-badge"><span class="em">⚽</span> Esportes</div>
+    <div class="ch-badge"><span class="em">🎭</span> HBO</div>
+    <div class="ch-badge"><span class="em">📛</span> ESPN</div>
+    <div class="ch-badge"><span class="em">🟧</span> GloboPay</div>
+    <div class="ch-badge"><span class="em">🥅</span> SporTV</div>
+    <div class="ch-badge"><span class="em">⭐</span> Star+</div>
+    <div class="ch-badge"><span class="em">♟️</span> Conmebol</div>
+    <div class="ch-badge"><span class="em">💱</span> MegaPix</div>
+    <div class="ch-badge"><span class="em">🥊</span> Combate</div>
+    <div class="ch-badge"><span class="em">🏀</span> NBA</div>
+    <div class="ch-badge"><span class="em">📖</span> Religiosos</div>
+    <div class="ch-badge"><span class="em">🎥</span> Space</div>
+    <div class="ch-badge"><span class="em">🧿</span> Animes</div>
+    <div class="ch-badge"><span class="em">📺</span> Novelas</div>
+    <div class="ch-badge"><span class="em">🥳</span> Desenhos</div>
+    <div class="ch-badge"><span class="em">📽️</span> Telecine</div>
+    <div class="ch-badge"><span class="em">🔞</span> Adultos</div>
+    <div class="ch-badge"><span class="em">🎬</span> Filmes/Séries</div>
+    <div class="ch-badge"><span class="em">📚</span> Documentários</div>
+    <div class="ch-badge"><span class="em">🎡</span> Disney Plus</div>
+    <div class="ch-badge"><span class="em">💼</span> Noticiários</div>
+  </div>
+</section>
+
+<!-- PLANO -->
+<section id="plano" style="text-align:center">
+  <div class="sec-label">Preço único e acessível</div>
+  <div class="sec-title">Um plano, tudo incluso</div>
+  <div class="plan-box">
+    <div class="plan-crown">🔥 Melhor custo-benefício do Brasil</div>
+    <div class="plan-name">Plano Mensal FSPlay</div>
+    <div class="plan-price-wrap">
+      <div class="plan-price"><sup>R$</sup>25</div>
+      <div class="plan-price-per">/mês</div>
+    </div>
+    <div class="plan-teste">🕙 Teste grátis por 4 horas antes de assinar!</div>
+    <ul class="plan-features">
+      <li>+30.000 canais ao vivo Full HD</li>
+      <li>Futebol, esportes e pay-per-view</li>
+      <li>Filmes, séries, novelas e animes</li>
+      <li>Netflix, HBO, Disney+, Star+, Amazon Prime</li>
+      <li>Premiere, SporTV, ESPN, Combate, NBA</li>
+      <li>Suporte na hora via WhatsApp ✅</li>
+      <li>Atualizações toda semana 🔄</li>
+      <li>Sem fidelidade — cancele quando quiser</li>
+    </ul>
+    <a href="https://wa.me/5511920030389?text=Olá!%20Quero%20testar%20o%20FSPlay%20grátis!" class="plan-btn" target="_blank">
+      🔥 Chama no teste grátis agora!
+    </a>
+  </div>
+</section>
+
+<!-- DISPOSITIVOS -->
+<section class="bg2" id="dispositivos">
+  <div class="sec-label">Compatibilidade total</div>
+  <div class="sec-title">Funciona em qualquer dispositivo</div>
+  <div class="devices-grid">
+    <div class="dev"><div class="di">📺</div><p>Smart TV</p></div>
+    <div class="dev"><div class="di">📺</div><p>TV Roku</p></div>
+    <div class="dev"><div class="di">📟</div><p>TV Box</p></div>
+    <div class="dev"><div class="di">📱</div><p>Celular</p></div>
+    <div class="dev"><div class="di">🕹️</div><p>Mi TV Stick</p></div>
+    <div class="dev"><div class="di">🕹️</div><p>Fire TV Stick</p></div>
+  </div>
+</section>
+
+<!-- SEM BUROCRACIA -->
+<section>
+  <div class="sec-label">Transparência total</div>
+  <div class="sec-title">Sem enrolação, sem pegadinha</div>
+  <div class="sem-grid">
+    <div class="sem-item"><span class="x">🚫</span> Sem fidelidade</div>
+    <div class="sem-item"><span class="x">🚫</span> Sem consulta SPC</div>
+    <div class="sem-item"><span class="x">🚫</span> Sem burocracia</div>
+    <div class="sem-item"><span class="x">🚫</span> Sem golpes</div>
+    <div class="sem-item"><span class="x">🚫</span> Sem contrato</div>
+    <div class="sem-item"><span class="x">🚫</span> Sem taxa de adesão</div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="bg2">
+  <div class="sec-label">Depoimentos reais</div>
+  <div class="sec-title">Quem usa, aprova 🔥</div>
+  <div class="testis-grid">
+    <div class="testi">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"Fiz o teste de 4 horas e já assinei na hora. Nunca travou, qualidade incrível e o suporte responde super rápido no WhatsApp. Recomendo pra todo mundo!"</div>
+      <div class="auth"><div class="ava">MR</div><div><div class="aname">Marcos R.</div><div class="aloc">São Paulo, SP</div></div></div>
+    </div>
+    <div class="testi">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"Cancelei a TV a cabo e economizo mais de R$200 por mês. Assisto futebol, A Fazenda, séries tudo pelo FSPlay. Por R$25 é impossível reclamar!"</div>
+      <div class="auth"><div class="ava">JP</div><div><div class="aname">Juliana P.</div><div class="aloc">Belo Horizonte, MG</div></div></div>
+    </div>
+    <div class="testi">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"O que me convenceu foi o teste grátis. Testei 4 horas, adorei e assino faz 8 meses. Atualiza toda semana e sempre tem canal novo. Top demais!"</div>
+      <div class="auth"><div class="ava">CS</div><div><div class="aname">Carlos S.</div><div class="aloc">Curitiba, PR</div></div></div>
+    </div>
+    <div class="testi">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"Assisto dorama todo dia pelo FSPlay. Catálogo enorme, legenda perfeita e sem travar. Melhor IPTV que já usei em qualidade e preço!"</div>
+      <div class="auth"><div class="ava">AL</div><div><div class="aname">Ana Lima</div><div class="aloc">Rio de Janeiro, RJ</div></div></div>
+    </div>
+    <div class="testi">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"Uso no Fire TV Stick sem problema nenhum. Futebol ao vivo em HD perfeito, sem corte. Suporte atendeu em menos de 5 minutos quando tive dúvida."</div>
+      <div class="auth"><div class="ava">RS</div><div><div class="aname">Roberto S.</div><div class="aloc">Porto Alegre, RS</div></div></div>
+    </div>
+    <div class="testi">
+      <div class="stars">★★★★★</div>
+      <div class="testi-text">"Indiquei pra minha família toda. Minha mãe assiste novela, meu filho assiste desenho e eu assisto esporte. Tudo num plano só por R$25. Absurdo!"</div>
+      <div class="auth"><div class="ava">FM</div><div><div class="aname">Fernanda M.</div><div class="aloc">Fortaleza, CE</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="sec-label">Dúvidas frequentes</div>
+  <div class="sec-title">Perguntas e respostas</div>
+  <div class="faq-wrap">
+    <details class="faq-item"><summary>Como funciona o teste grátis de 4 horas?</summary><div class="faq-a">Simples: manda uma mensagem no WhatsApp pedindo o teste. A gente ativa na hora, sem precisar pagar nada. Você testa por 4 horas à vontade e, se gostar, assina por R$25/mês.</div></details>
+    <details class="faq-item"><summary>Como faço o pagamento?</summary><div class="faq-a">Aceitamos PIX, cartão de crédito e débito. O pagamento é mensal, sem fidelidade e sem contrato — cancele quando quiser sem multa.</div></details>
+    <details class="faq-item"><summary>Como instalo no meu dispositivo?</summary><div class="faq-a">Após assinar, você recebe um tutorial completo pelo WhatsApp com o passo a passo para o seu dispositivo (Smart TV, celular, Fire Stick, etc). Nosso suporte também pode ajudar ao vivo se precisar.</div></details>
+    <details class="faq-item"><summary>Com que frequência os canais são atualizados?</summary><div class="faq-a">Toda semana! Nosso time atualiza a lista de canais e corrige qualquer canal que possa ter saído do ar, garantindo sempre o melhor catálogo disponível.</div></details>
+    <details class="faq-item"><summary>O serviço trava ou cai?</summary><div class="faq-a">Nossos servidores são de alta performance com 99% de uptime. Em caso de qualquer instabilidade, é só chamar no WhatsApp e a gente resolve na hora.</div></details>
+    <details class="faq-item"><summary>Funciona no celular e na Smart TV ao mesmo tempo?</summary><div class="faq-a">Sim! Você pode instalar em vários dispositivos. Entre em contato pelo WhatsApp para saber os detalhes do seu plano.</div></details>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-sec" id="contato">
+  <div class="sec-label">Bora assistir?</div>
+  <div class="sec-title">4 horas de teste grátis te esperam 🔥</div>
+  <p>Sem pagar nada, sem cadastro complicado. Manda uma mensagem agora e começa a assistir em minutos.</p>
+  <a href="https://wa.me/5511920030389?text=Olá!%20Quero%20testar%20o%20FSPlay%20grátis%20por%204%20horas!" class="wa-big" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Chama no WhatsApp agora
+  </a>
+  <span class="wa-num">(11) 92003-0389</span>
+</section>
+
+<footer>
+  <div class="flogo">FS<span>Play</span></div>
+  <p>O melhor IPTV do Brasil — qualidade, estabilidade e suporte de verdade.</p>
+  <p style="margin-top:12px">© 2025 FSPlay IPTV. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>
