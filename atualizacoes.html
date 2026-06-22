@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Novidades FSPlay — Atualizações da Semana</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#07070f;--bg2:#0c0c18;--bg3:#131220;--bg4:#1a1828;--accent:#8b5cf6;--accent2:#a78bfa;--accent3:#c4b5fd;--txt:#f4f0ff;--txt2:#9490b0;--txt3:#54506e;--border:#1e1b30;--green:#22c55e;--gold:#f59e0b;--red:#ef4444}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;min-height:100vh}
+.bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(30,27,48,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(30,27,48,.3) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 80% 60% at 50% 0%,black 0%,transparent 70%);pointer-events:none;z-index:0}
+.wrap{max-width:860px;margin:0 auto;padding:32px 20px 80px;position:relative;z-index:1}
+nav{background:rgba(7,7,15,.96);border-bottom:1px solid var(--border);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:64px;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-mark{width:38px;height:38px}
+.logo-mark svg{width:38px;height:38px}
+.logo-name{font-size:18px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.logo-name span{color:var(--accent2)}
+.nav-right{display:flex;gap:10px}
+.btn-admin{background:var(--accent);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;border:none;cursor:pointer;transition:background .2s}
+.btn-admin:hover{background:var(--accent2)}
+.btn-site{background:var(--bg3);color:var(--txt2);padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;border:1px solid var(--border);transition:all .2s}
+.btn-site:hover{color:#fff;border-color:var(--accent)}
+.page-header{text-align:center;padding:40px 0 32px}
+.page-eyebrow{font-size:11px;font-weight:700;color:var(--accent2);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;justify-content:center;gap:8px}
+.page-eyebrow::before,.page-eyebrow::after{content:'';width:24px;height:2px;background:var(--accent);border-radius:2px}
+.page-title{font-size:clamp(28px,5vw,44px);font-weight:900;color:#fff;letter-spacing:-1.5px;margin-bottom:10px}
+.page-sub{font-size:15px;color:var(--txt2)}
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;justify-content:center}
+.filter-tab{background:var(--bg3);border:1px solid var(--border);color:var(--txt2);padding:7px 16px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+.filter-tab.active,.filter-tab:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+.updates-list{display:flex;flex-direction:column;gap:20px}
+.update-card{background:var(--bg2);border:1px solid var(--border);border-radius:18px;overflow:hidden;transition:border-color .2s}
+.update-card:hover{border-color:rgba(139,92,246,.3)}
+.card-header{padding:18px 22px 14px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid var(--border)}
+.card-week{font-size:11px;font-weight:700;color:var(--accent2);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.card-date{font-size:13px;color:var(--txt2)}
+.card-title{font-size:17px;font-weight:700;color:#fff;margin-top:2px}
+.new-badge{background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.card-body{padding:18px 22px}
+.category-block{margin-bottom:16px}
+.category-block:last-child{margin-bottom:0}
+.cat-label{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+.cat-label::after{content:'';flex:1;height:1px;background:var(--border)}
+.items-grid{display:flex;flex-direction:column;gap:6px}
+.item-row{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--txt)}
+.item-icon{font-size:16px;width:22px;text-align:center;flex-shrink:0}
+.item-name{flex:1}
+.item-tag{font-size:10px;color:var(--txt3);background:var(--bg3);border:1px solid var(--border);padding:2px 8px;border-radius:10px;flex-shrink:0}
+.item-new{font-size:10px;color:var(--green);background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);padding:2px 8px;border-radius:10px;flex-shrink:0}
+.empty-state{text-align:center;padding:60px 20px;color:var(--txt2)}
+.empty-state .icon{font-size:48px;margin-bottom:16px}
+.loading{text-align:center;padding:60px 20px;color:var(--txt2);font-size:15px}
+.loading span{display:inline-block;animation:pulse 1.2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+/* ADMIN */
+.pass-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:none;align-items:center;justify-content:center;padding:20px}
+.pass-overlay.open{display:flex}
+.pass-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:36px;max-width:340px;width:100%;text-align:center}
+.pass-box h3{font-size:20px;font-weight:800;color:#fff;margin-bottom:8px}
+.pass-box p{font-size:13px;color:var(--txt2);margin-bottom:24px}
+.pass-input{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--txt);padding:12px 16px;border-radius:10px;font-size:18px;text-align:center;letter-spacing:4px;margin-bottom:12px;font-family:inherit}
+.pass-input:focus{outline:none;border-color:var(--accent)}
+.pass-error{font-size:13px;color:var(--red);margin-bottom:12px;display:none}
+.pass-btns{display:flex;gap:10px}
+.btn-pass-confirm{flex:1;background:var(--accent);color:#fff;padding:12px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;border:none}
+.btn-pass-cancel{background:var(--bg3);color:var(--txt2);padding:12px 16px;border-radius:10px;font-size:15px;cursor:pointer;border:1px solid var(--border)}
+.admin-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.admin-overlay.open{display:flex}
+.admin-panel{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:100%;max-width:640px;margin:auto;padding:28px}
+.admin-panel h2{font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
+.admin-panel p{font-size:13px;color:var(--txt2);margin-bottom:24px}
+.form-group{margin-bottom:16px}
+.form-group label{font-size:12px;font-weight:600;color:var(--txt2);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:var(--bg3);border:1px solid var(--border);color:var(--txt);padding:10px 14px;border-radius:10px;font-size:14px;font-family:inherit;transition:border .2s}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--accent)}
+.categories-builder{display:flex;flex-direction:column;gap:12px}
+.cat-builder{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px}
+.cat-builder-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cat-items-area{display:flex;flex-direction:column;gap:6px}
+.cat-item-row{display:flex;gap:8px}
+.cat-item-row input{flex:1}
+.btn-add-item{background:rgba(139,92,246,.1);border:1px dashed rgba(139,92,246,.3);color:var(--accent2);padding:7px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;width:100%;margin-top:6px;transition:all .2s}
+.btn-add-cat{background:var(--bg4);border:1px dashed var(--border);color:var(--txt2);padding:10px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;width:100%;transition:all .2s}
+.btn-add-cat:hover{border-color:var(--accent);color:#fff}
+.btn-del{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.admin-actions{display:flex;gap:10px;margin-top:24px}
+.btn-publish{flex:1;background:var(--accent);color:#fff;padding:13px;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;border:none}
+.btn-cancel-admin{background:var(--bg3);color:var(--txt2);padding:13px 20px;border-radius:12px;font-size:15px;cursor:pointer;border:1px solid var(--border)}
+.admin-list{margin-top:24px;border-top:1px solid var(--border);padding-top:20px}
+.admin-list h3{font-size:14px;font-weight:700;color:var(--txt2);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px}
+.admin-item{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg3);border-radius:10px;margin-bottom:8px;gap:12px}
+.admin-item-info{flex:1}
+.admin-item-title{font-size:14px;font-weight:600;color:#fff}
+.admin-item-date{font-size:12px;color:var(--txt2)}
+.admin-item-actions{display:flex;gap:6px}
+.btn-edit{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:var(--accent2);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:12px 24px;border-radius:12px;font-size:14px;font-weight:600;z-index:500;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+footer{text-align:center;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);font-size:13px;color:var(--txt3)}
+</style>
+</head>
+<body>
+<div class="bg-grid"></div>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-mark"><svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="11" fill="#8b5cf6"/><polygon points="17,13 17,31 32,22" fill="white"/><rect x="10" y="13" width="4" height="18" rx="2" fill="white" opacity=".9"/></svg></div>
+    <div><div class="logo-name">FS<span>Play</span></div></div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html" class="btn-site">← Voltar ao site</a>
+    <button class="btn-admin" onclick="openAdmin()">+ Nova atualização</button>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="page-header">
+    <div class="page-eyebrow">Novidades</div>
+    <div class="page-title">Atualizações da Semana 🎬</div>
+    <div class="page-sub">Confira o que foi adicionado ao catálogo FSPlay</div>
+  </div>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterUpdates('all',this)">Todas</button>
+    <button class="filter-tab" onclick="filterUpdates('filmes',this)">🎬 Filmes</button>
+    <button class="filter-tab" onclick="filterUpdates('series',this)">📺 Séries</button>
+    <button class="filter-tab" onclick="filterUpdates('canais',this)">📡 Canais</button>
+    <button class="filter-tab" onclick="filterUpdates('esportes',this)">⚽ Esportes</button>
+  </div>
+  <div class="updates-list" id="updatesList"><div class="loading"><span>Carregando atualizações...</span></div></div>
+  <footer>FSPlay IPTV — Atualizado toda semana para você 🔄</footer>
+</div>
+
+<!-- SENHA -->
+<div class="pass-overlay" id="passOverlay">
+  <div class="pass-box">
+    <div style="font-size:36px;margin-bottom:16px">🔐</div>
+    <h3>Área restrita</h3>
+    <p>Digite a senha para acessar o painel de atualizações</p>
+    <input type="password" class="pass-input" id="passInput" placeholder="••••••" maxlength="20" onkeydown="if(event.key==='Enter')checkPass()">
+    <div class="pass-error" id="passError">❌ Senha incorreta. Tente novamente.</div>
+    <div class="pass-btns">
+      <button class="btn-pass-cancel" onclick="closePassOverlay()">Cancelar</button>
+      <button class="btn-pass-confirm" onclick="checkPass()">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-overlay" id="adminOverlay">
+  <div class="admin-panel">
+    <h2>📝 Nova Atualização</h2>
+    <p>Preencha o que foi adicionado nessa semana e publique.</p>
+    <div class="form-group">
+      <label>Título da semana</label>
+      <input type="text" id="adminTitle" placeholder="Ex: Semana 24 — Copa do Mundo + Filmes de Ação">
+    </div>
+    <div class="form-group">
+      <label>Data</label>
+      <input type="date" id="adminDate">
+    </div>
+    <div class="form-group">
+      <label>Categorias e itens adicionados</label>
+      <div class="categories-builder" id="catsBuilder"></div>
+      <button class="btn-add-cat" onclick="addCategory()" style="margin-top:10px">+ Adicionar categoria</button>
+    </div>
+    <div class="admin-actions">
+      <button class="btn-cancel-admin" onclick="closeAdmin()">Cancelar</button>
+      <button class="btn-publish" onclick="publishUpdate()">🚀 Publicar atualização</button>
+    </div>
+    <div class="admin-list">
+      <h3>Publicadas</h3>
+      <div id="adminPublishedList"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, orderBy, query } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDn1dSFIq8yPNxuDWQpXz6033cMntNFkrg",
+  authDomain: "fsplay-atualizacoes.firebaseapp.com",
+  projectId: "fsplay-atualizacoes",
+  storageBucket: "fsplay-atualizacoes.firebasestorage.app",
+  messagingSenderId: "161511719396",
+  appId: "1:161511719396:web:e8cc12b885cff9f4f907f1"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const CAT_ICONS = {filmes:"🎬",series:"📺",series_novas:"✅",canais:"📡",esportes:"⚽",animes:"🧿",infantil:"🥳",documentarios:"📚",religioso:"📖",adultos:"🔞",outros:"📌"};
+const CAT_LABELS = {filmes:"Filmes Adicionados",series:"Séries — Novos Episódios",series_novas:"Séries Novas",canais:"Canais ao Vivo",esportes:"Esportes",animes:"Animes",infantil:"Infantil / Desenhos",documentarios:"Documentários",religioso:"Religiosos",adultos:"Canais Adultos",outros:"Outros"};
+
+const ADMIN_PASS = 'fsplay2024';
+const SESSION_KEY = 'fsplay_admin_auth';
+let updates = [];
+let editingId = null;
+let currentFilter = 'all';
+
+function showToast(msg, ok=true){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = ok ? 'var(--green)' : 'var(--red)';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// LOAD FROM FIREBASE
+async function loadUpdates(){
+  try {
+    const q = query(collection(db, 'updates'), orderBy('date', 'desc'));
+    const snap = await getDocs(q);
+    updates = snap.docs.map(d=>({id:d.id, ...d.data()}));
+    renderUpdates(currentFilter);
+    renderAdminList();
+  } catch(e){
+    document.getElementById('updatesList').innerHTML = '<div class="empty-state"><div class="icon">⚠️</div><p>Erro ao carregar. Verifique a conexão.</p></div>';
+  }
+}
+
+function renderUpdates(filter='all'){
+  currentFilter = filter;
+  const list = document.getElementById('updatesList');
+  let data = [...updates];
+  if(filter !== 'all') data = data.filter(u=> u.categories && u.categories.some(c=>c.type===filter||(filter==='series'&&(c.type==='series'||c.type==='series_novas'))));
+  if(data.length === 0){
+    list.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>Nenhuma atualização publicada ainda.</p></div>';
+    return;
+  }
+  list.innerHTML = data.map((u,i)=>{
+    const d = new Date(u.date+'T12:00:00');
+    const dateStr = d.toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+    const cats = (u.categories||[]).map(c=>`
+      <div class="category-block">
+        <div class="cat-label">${CAT_ICONS[c.type]||'📌'} ${CAT_LABELS[c.type]||c.type}</div>
+        <div class="items-grid">
+          ${(c.items||[]).map(it=>`<div class="item-row"><span class="item-icon">🍿</span><span class="item-name">${it.name}</span>${it.tag?`<span class="item-tag">${it.tag}</span>`:''}<span class="item-new">NOVO</span></div>`).join('')}
+        </div>
+      </div>`).join('');
+    return `<div class="update-card">
+      <div class="card-header">
+        <div>
+          <div class="card-week">🔄 Atualização</div>
+          <div class="card-title">${u.title}</div>
+          <div class="card-date">📅 ${dateStr}</div>
+        </div>
+        ${i===0?'<span class="new-badge">✨ Novo</span>':''}
+      </div>
+      <div class="card-body">${cats}</div>
+    </div>`;
+  }).join('');
+}
+
+window.filterUpdates = (f, btn)=>{
+  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderUpdates(f);
+};
+
+// PASSWORD
+window.openAdmin = ()=>{
+  if(sessionStorage.getItem(SESSION_KEY)==='true') _openAdmin();
+  else {
+    document.getElementById('passInput').value='';
+    document.getElementById('passError').style.display='none';
+    document.getElementById('passOverlay').classList.add('open');
+    setTimeout(()=>document.getElementById('passInput').focus(),100);
+  }
+};
+window.closePassOverlay = ()=>document.getElementById('passOverlay').classList.remove('open');
+window.checkPass = ()=>{
+  if(document.getElementById('passInput').value===ADMIN_PASS){
+    sessionStorage.setItem(SESSION_KEY,'true');
+    document.getElementById('passOverlay').classList.remove('open');
+    _openAdmin();
+  } else {
+    document.getElementById('passError').style.display='block';
+    document.getElementById('passInput').value='';
+  }
+};
+
+function _openAdmin(){
+  editingId=null;
+  document.getElementById('adminTitle').value='';
+  document.getElementById('adminDate').value=new Date().toISOString().slice(0,10);
+  document.getElementById('catsBuilder').innerHTML='';
+  addCategory();
+  document.getElementById('adminOverlay').classList.add('open');
+}
+window.closeAdmin = ()=>document.getElementById('adminOverlay').classList.remove('open');
+
+window.addCategory = (cat=null)=>{
+  const builder = document.getElementById('catsBuilder');
+  const id = 'cat_'+Date.now();
+  const div = document.createElement('div');
+  div.className='cat-builder'; div.id=id;
+  div.innerHTML=`<div class="cat-builder-header">
+    <select class="cat-type" style="background:var(--bg4);border:1px solid var(--border);color:var(--txt);padding:6px 10px;border-radius:8px;font-size:13px;flex:1;margin-right:8px">
+      ${Object.entries(CAT_LABELS).map(([k,v])=>`<option value="${k}" ${cat&&cat.type===k?'selected':''}>${CAT_ICONS[k]} ${v}</option>`).join('')}
+    </select>
+    <button class="btn-del" onclick="this.closest('.cat-builder').remove()">✕</button>
+  </div>
+  <div class="cat-items-area" id="items_${id}"></div>
+  <button class="btn-add-item" onclick="addItem('items_${id}')">+ Adicionar item</button>`;
+  builder.appendChild(div);
+  if(cat&&cat.items) cat.items.forEach(it=>addItem('items_'+id,it));
+  else addItem('items_'+id);
+};
+
+window.addItem = (containerId, item=null)=>{
+  const cont = document.getElementById(containerId);
+  const row = document.createElement('div');
+  row.className='cat-item-row';
+  row.innerHTML=`<input type="text" placeholder="Nome do filme/série/canal..." value="${item?item.name:''}">
+    <input type="text" placeholder="Detalhe (ex: 2024)" value="${item?item.tag:''}" style="width:130px;flex:unset">
+    <button class="btn-del" onclick="this.parentElement.remove()">✕</button>`;
+  cont.appendChild(row);
+};
+
+window.publishUpdate = async ()=>{
+  const title = document.getElementById('adminTitle').value.trim();
+  const date = document.getElementById('adminDate').value;
+  if(!title||!date){showToast('Preencha o título e a data!',false);return;}
+  const cats=[];
+  document.querySelectorAll('.cat-builder').forEach(c=>{
+    const type=c.querySelector('.cat-type').value;
+    const items=[];
+    c.querySelectorAll('.cat-items-area .cat-item-row').forEach(row=>{
+      const inputs=row.querySelectorAll('input');
+      const name=inputs[0].value.trim();
+      const tag=inputs[1].value.trim();
+      if(name) items.push({name,tag});
+    });
+    if(items.length) cats.push({type,items});
+  });
+  if(!cats.length){showToast('Adicione pelo menos um item!',false);return;}
+  try{
+    if(editingId){
+      await updateDoc(doc(db,'updates',editingId),{title,date,categories:cats});
+      showToast('✅ Atualização editada!');
+    } else {
+      await addDoc(collection(db,'updates'),{title,date,categories:cats});
+      showToast('✅ Publicado com sucesso!');
+    }
+    await loadUpdates();
+    closeAdmin();
+  }catch(e){showToast('Erro ao publicar. Tente novamente.',false);}
+};
+
+function renderAdminList(){
+  const list=document.getElementById('adminPublishedList');
+  if(!updates.length){list.innerHTML='<p style="font-size:13px;color:var(--txt3)">Nenhuma publicação ainda.</p>';return;}
+  list.innerHTML=updates.slice(0,6).map(u=>`
+    <div class="admin-item">
+      <div class="admin-item-info">
+        <div class="admin-item-title">${u.title}</div>
+        <div class="admin-item-date">${new Date(u.date+'T12:00:00').toLocaleDateString('pt-BR')}</div>
+      </div>
+      <div class="admin-item-actions">
+        <button class="btn-edit" onclick="editUpdate('${u.id}')">✏️</button>
+        <button class="btn-del" onclick="deleteUpdate('${u.id}')">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+window.editUpdate = (id)=>{
+  const u=updates.find(x=>x.id===id);
+  if(!u) return;
+  editingId=id;
+  document.getElementById('adminTitle').value=u.title;
+  document.getElementById('adminDate').value=u.date;
+  document.getElementById('catsBuilder').innerHTML='';
+  u.categories.forEach(c=>addCategory(c));
+  document.getElementById('adminOverlay').scrollTo(0,0);
+};
+
+window.deleteUpdate = async (id)=>{
+  if(!confirm('Excluir esta atualização?')) return;
+  try{
+    await deleteDoc(doc(db,'updates',id));
+    showToast('🗑 Excluído!');
+    await loadUpdates();
+  }catch(e){showToast('Erro ao excluir.',false);}
+};
+
+document.getElementById('adminOverlay').addEventListener('click',e=>{
+  if(e.target===document.getElementById('adminOverlay')) closeAdmin();
+});
+
+loadUpdates();
+</script>
+</body>
+</html>
